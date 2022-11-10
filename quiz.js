@@ -36,3 +36,21 @@ const question = document.querySelector(".question");
 const answersContainer = document.querySelector(".answers");
 const submit = document.querySelector(".submit");
 const play = document.querySelector(".play");
+
+let qIndex = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let total = 0;
+let selectedAnswer;
+
+const showQuestion = (qNumber) => {
+  question.textContent = data[qNumber].question;
+  answersContainer.innerHTML = data[qNumber].answers.map((item, index) => {
+    const answerDiv = document.createElement("div");
+    answerDiv.classList.add("answer");
+    answerDiv.innerHTML = answer.answer;
+    answersContainer.appendChild(answerDiv);
+  });
+};
+
+showQuestion(qIndex);
