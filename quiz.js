@@ -44,13 +44,38 @@ let total = 0;
 let selectedAnswer;
 
 const showQuestion = (qNumber) => {
+  selectedAnswer = null;
   question.textContent = data[qNumber].question;
-  answersContainer.innerHTML = data[qNumber].answers.map((item, index) => {
-    const answerDiv = document.createElement("div");
-    answerDiv.classList.add("answer");
-    answerDiv.innerHTML = answer.answer;
-    answersContainer.appendChild(answerDiv);
+  answersContainer.innerHTML = data[qNumber].answers
+    .map(
+      (item, index) =>
+        `<div class="answer">
+<input name="answer" type="radio" id=${index} value=${item.isCorrect} />
+<label for=${index}>${item.answer}</label>
+</div>`
+    )
+    .join("");
+
+  selectAnswer();
+};
+
+const selectAnswer = (e) => {
+  answersContainer.querySelectorAll("input").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      selectedAnswer = e.target.value;
+    });
+  });
+};
+
+const submitAnswer = () => {
+  submit.addEventListener("click", () => {
+    if (selectedAnswer !== null) {
+      selectedAnswer === "true" ? correctCount++ : wrongCount++;
+      qIndex++;
+      showQuestion(qIndex);
+    } else alert("Please select an answer");
   });
 };
 
 showQuestion(qIndex);
+submitAnswer();
