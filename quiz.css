@@ -6,11 +6,6 @@ body {
     font-weight: "Poor Story", sans-serif;
 }
 
-.game{
-    /* display: none; */
-    
-}
-
 .container{
     width: 800px;
     height: 500px;
@@ -57,7 +52,7 @@ body {
     color: green;
 }
 
-.incorrect{
+.wrong{
     color: red;
 }
 

@@ -43,7 +43,35 @@ let wrongCount = 0;
 let total = 0;
 let selectedAnswer;
 
+const playAgain = () => {
+  qIndex = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  total = 0;
+  showQuestion(qIndex);
+};
+
+play.addEventListener("click", () => {
+  gameScreen.style.display = "block";
+  resultScreen.style.display = "none";
+  playAgain();
+});
+
+const showResults = () => {
+  resultScreen.style.display = "block";
+  gameScreen.style.display = "none";
+
+  resultScreen.querySelector(
+    ".correct"
+  ).textContent = `Correct: ${correctCount}`;
+  resultScreen.querySelector(".wrong").textContent = `Incorrect: ${wrongCount}`;
+  resultScreen.querySelector(".score").textContent = `Score: ${
+    (correctCount - wrongCount) * 10
+  }`;
+};
+
 const showQuestion = (qNumber) => {
+  if (qIndex === data.length) return showResults();
   selectedAnswer = null;
   question.textContent = data[qNumber].question;
   answersContainer.innerHTML = data[qNumber].answers
